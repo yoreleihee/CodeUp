@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int a = 3;
+    int b = 2;
+    int c = 6;
+    int d = 2;
+
+    cout << (a + b) * (c / d) << endl;
+    return 0;
+}
