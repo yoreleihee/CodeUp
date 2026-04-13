@@ -1,5 +1,17 @@
 #include <iostream>
 using namespace std;
+class Weapon {
+    char name[20];
+
+public:
+    void SetName(char *name) {
+        memcpy(this->name, name, sizeof(char) * strlen(name));
+    }
+
+    char* GetName() {
+        return name;
+    }
+};
 
 class Player {
     Weapon weapon;
