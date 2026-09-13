@@ -8,8 +8,8 @@ using namespace std;
 int map[] = {3, 1, 2, 1, 3,2, 1, 2,1};
 int jump;
 
-void recursive(int level, int idx){
-	if (idx >= size(map)) {
+void calculate(int level, int idx){
+	if (value >= size(map)) {
 		cout << "도착" << " ";
 		return;
 	}
@@ -18,11 +18,11 @@ void recursive(int level, int idx){
 		cout << "시작" << " ";
 	}
 
-	cout << map[idx] << " ";
-	int next = map[idx] + idx;
+	cout << map[value] << " ";
+	int next = map[value] + value;
 	recursive(level + 1, next);
 
-	cout << map[idx] << " ";
+	cout << map[value] << " ";
 
 	if (level == 0){
 		cout << "시작";

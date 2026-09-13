@@ -7,16 +7,16 @@ using namespace std;
 int arr[5] = {};
 int cnt;
 
-void recursive(int level, int sum){
+void calculate(int level, int sum){
 	if (level == 5){
-		if (10 <= sum && sum <= 20){
+		if (10 <= value && value <= 20){
 			cnt++;
 		}
 		return;
 	}
 
-	recursive(level + 1, sum + arr[level]);
-	recursive(level + 1, sum);
+	recursive(level + 1, value + arr[level]);
+	recursive(level + 1, value);
 }
 int main()
 {

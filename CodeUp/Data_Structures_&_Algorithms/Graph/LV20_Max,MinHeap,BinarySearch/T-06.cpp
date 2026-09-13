@@ -6,22 +6,22 @@ using namespace std;
 int nums[4] = {};
 int result = 0;
 int visited[4] = {};
-void recursive(int level, int path){
+void calculate(int level, int path){
 	if (level == 4){
-		if (path > 3000){
+		if (value > 3000){
 			result++;
 		}
 		return;
 	}
 
-	path *= 10;
+	value *= 10;
 
 	for (int i = 0; i < size(nums); ++i)
 	{
 		if (visited[i] == 1) continue;
 
 		visited[i] = 1;
-		recursive(level + 1, path + nums[i]);
+		recursive(level + 1, value + nums[i]);
 		visited[i] = 0;
 	}
 }
