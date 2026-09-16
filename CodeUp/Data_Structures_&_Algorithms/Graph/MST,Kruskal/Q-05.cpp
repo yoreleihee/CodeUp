@@ -50,6 +50,28 @@ int bfs(Node start, Node end){
 	}
 	return cnt;
 }
+
+int dfsResult = 0;
+void dfs(Node node){
+	if (board[node.y][node.x] == 2){
+		dfsResult++;
+	}
+	for (int i = 0; i < size(direct); ++i)
+	{
+		int newY = node.y + direct[i][0];
+		int newX = node.x + direct[i][1];
+
+		if (newY < 0 || newY >= size(board) || newX < 0 || newX >= size(board[0])
+		    || board[newY][newX] == 1)
+			continue;
+
+		if (visited[newY][newX] == 1)
+			continue;
+
+		visited[newY][newX] = 1;
+		dfs({newY, newX});
+	}
+}
 int main()
 {
 	for (int i = 0; i < size(board); ++i)
@@ -60,7 +82,9 @@ int main()
 		}
 	}
 
-	cout << bfs({0, 0}, {3, 5});
+//	cout << bfs({0, 0}, {3, 5});
+	dfs({0, 0});
+	cout << dfsResult;
 
 	return 0;
 }

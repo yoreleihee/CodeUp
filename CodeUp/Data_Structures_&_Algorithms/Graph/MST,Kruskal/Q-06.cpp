@@ -48,6 +48,26 @@ int bfs(){
 	}
 	return cur.cnt;
 }
+
+int dfs(int level, Node node){
+	for (int i = 0; i < size(direct); ++i)
+	{
+		int newY = node.y + direct[i][0];
+		int newX = node.x + direct[i][1];
+
+		if (newY < 0 || newY >= size(board) || newX < 0 || newX >= size(board[0]))
+			continue;
+
+		if (visited[newY][newX] == 1)
+			continue;
+
+		visited[newY][newX] = 1;
+		dfs(level + 1, {newY, newX});
+	}
+
+	return level;
+}
+
 int main()
 {
 	for (int i = 0; i < 4; ++i)

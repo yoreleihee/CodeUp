@@ -25,6 +25,40 @@ struct Node{
 };
 int visited[4][4] = {};
 
+bool isPossible(int y, int x){
+	if (y < 0 || y >= size(map) || x < 0 || x >= size(map[0]) || map[y][x] == 1)
+		return false;
+
+	if (visited[y][x] == 1)
+		return false;
+
+	return true;
+}
+
+int dfs(Node node, Node end){
+	if (node.y == end.y && node.x == end.x)
+	{
+		return node.cnt;
+	}
+
+	int minValue = INT_MAX;
+
+	for (int i = 0; i < size(direct); ++i)
+	{
+		int newY = node.y + direct[i][0];
+		int newX = node.x + direct[i][1];
+
+		if (!isPossible(newY, newX)) continue;
+
+		visited[newY][newX] = 1;
+		int cnt = dfs({newY, newX, node.cnt + 1}, end);
+		visited[newY][newX] = 0;
+
+		minValue = min(cnt, minValue);
+	}
+
+	return minValue;
+}
 int bfs(Node start, Node end){
 	queue<Node> nodeQueue;
 	nodeQueue.push(start);
@@ -43,11 +77,7 @@ int bfs(Node start, Node end){
 			int newY = cur.y + direct[i][0];
 			int newX = cur.x + direct[i][1];
 
-			if (newY < 0 || newY >= size(map) || newX < 0 || newX >= size(map[0]) || map[newY][newX] == 1)
-				continue;
-
-			if (visited[newY][newX] == 1)
-				continue;
+			if (!isPossible(newY, newX)) continue;
 
 			visited[newY][newX] = 1;
 			nodeQueue.push({newY, newX, cur.cnt + 1});
@@ -58,7 +88,11 @@ int bfs(Node start, Node end){
 }
 int main()
 {
-	int result = bfs({0, 0, 0}, {3, 3, 0});
-	cout << result;
+//	int bfsResult = bfs({0, 0, 0}, {3, 3, 0});
+//	cout << bfsResult;
+
+	visited[0][0] = 1;
+	int dfsResult = dfs({0, 0, 0}, {3, 3, 0});
+	cout << dfsResult;
 	return 0;
 }

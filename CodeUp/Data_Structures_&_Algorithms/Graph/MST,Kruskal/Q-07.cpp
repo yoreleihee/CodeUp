@@ -50,6 +50,27 @@ int bfs(Node start){
 
 	return count;
 }
+
+int cnt = 1;
+int dfs(Node node, int level){
+	for (int i = 0; i < size(direct); ++i)
+	{
+		int newY = node.y + direct[i][0];
+		int newX = node.x + direct[i][1];
+
+		if (newY < 0 || newY >= size(board) || newX < 0 || newX >= size(board[0])
+		    || board[newY][newX] == 0)
+			continue;
+
+		if (visited[newY][newX] == 1)
+			continue;
+
+		cnt++;
+
+		visited[newY][newX] = 1;
+		dfs({newY, newX}, level + 1);
+	}
+}
 int main()
 {
 	for (int i = 0; i < size(board); ++i)
@@ -60,8 +81,9 @@ int main()
 		}
 	}
 
-	int result = bfs({0, 0});
-	cout << result;
+	visited[0][0] = 1;
+	dfs({0, 0}, 0);
+	cout << cnt;
 
 	return 0;
 }

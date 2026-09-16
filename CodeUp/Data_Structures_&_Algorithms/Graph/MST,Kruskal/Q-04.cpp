@@ -23,7 +23,7 @@ int direct[4][2] = {
 };
 
 int bfs(Node start, Node end){
-	int visited[5][3] = {};
+	int visited[3][5] = {};
 
 	queue<Node> nodeQueue;
 	nodeQueue.push(start);
@@ -55,13 +55,45 @@ int bfs(Node start, Node end){
 
 	return -1;
 }
+
+int visited[3][5] = {};
+int dfs(Node node, Node end){
+	if (node.y == end.y && node.x == end.x){
+		return node.cnt;
+	}
+
+	int minValue = INT_MAX;
+	for (int i = 0; i < size(direct); ++i)
+	{
+		int newY = node.y + direct[i][0];
+		int newX = node.x + direct[i][1];
+
+		if (newY < 0 || newY >= size(board) || newX < 0 || newX >= size(board[0])
+		    || board[newY][newX] == 1)
+			continue;
+
+		if (visited[newY][newX] == 1)
+			continue;
+
+		visited[newY][newX] = 1;
+		int cnt = dfs({newY, newX}, end);
+		visited[newY][newX] = 0;
+
+		minValue = min(minValue, cnt);
+	}
+
+	return minValue;
+}
 int main()
 {
 	Node cheeseNode{2, 0, 0};
 	Node friendNode{0, 3, 0};
 
-	int cheeseDistance = bfs({0, 0, 0}, cheeseNode);
-	int friendDistance = bfs(cheeseNode, friendNode);
+//	int cheeseDistance = bfs({0, 0, 0}, cheeseNode);
+//	int friendDistance = bfs(cheeseNode, friendNode);
+
+	int cheeseDistance = dfs({0, 0, 0}, cheeseNode);
+	int friendDistance = dfs(cheeseNode, friendNode);
 
 	cout << (cheeseDistance + friendDistance);
 
