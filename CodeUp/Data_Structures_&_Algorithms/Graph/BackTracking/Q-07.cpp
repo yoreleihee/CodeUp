@@ -5,7 +5,6 @@
 #include <map>
 #include <unordered_map>
 using namespace std;
-// ?????
 
 // 경로 최소 시간 찾기
 int graph[4][4] = {
@@ -55,19 +54,25 @@ int dfs(int node, int value, int minValue){
 struct Node{
 	int idx;
 	int value;
+	bool visited[4];
 };
 
 int bfs(int start){
-	int visitedForBfs[4] = {};
 	queue<Node> nodeQueue;
-	nodeQueue.push({start, 0});
-	visitedForBfs[start] = 1;
+	Node first{};
+	first.idx = start;
+	first.value = 0;
+	first.visited[start] = true;
+	nodeQueue.push(first);
+
 	int minValue = INT_MAX;
 
 	while (!nodeQueue.empty()){
 
 		Node curr = nodeQueue.front();
 		nodeQueue.pop();
+
+		curr.visited[curr.idx] = true;
 
 		if (curr.idx == target){
 			minValue = min(curr.value, minValue);
@@ -76,12 +81,17 @@ int bfs(int start){
 
 		for (int i = 0; i < size(graph[curr.idx]); ++i)
 		{
-			if (visitedForBfs[i] == 1) continue;
+			if (curr.visited[i]) continue;
 			if (graph[curr.idx][i] == 0) continue;
 
-			visitedForBfs[i] = 1;
+
 			int cost = curr.value + graph[curr.idx][i];
-			nodeQueue.push({i, cost});
+
+			Node next {};
+			next.idx = i;
+			next.value = cost;
+			memcpy(next.visited, curr.visited, sizeof(curr.visited));
+			nodeQueue.push(next);
 		}
 	}
 
