@@ -1,11 +1,5 @@
-# C++ 자료구조·알고리즘
+<p align="center">
+  <img src="https://yoreleihee.github.io/cpp-logo.svg" alt="C++ 로고" width="120">
+</p>
 
-C++ 문법과 자료구조·알고리즘을 학습하며 직접 작성한 코드를 모아둔 개인 학습 저장소입니다.
-
-인터넷 검색과 AI를 사용하지 않고, 문제를 분석한 뒤 코드를 직접 설계하고 작성했습니다.
-
-## 저장소 구성
-
-- [C++ 기초](CodeUp/C%2B%2B_Fundamentals): 문법, 포인터, 객체지향, STL
-- [자료구조·알고리즘](CodeUp/Data_Structures_and_Algorithms): 정렬, 재귀, 연결 리스트, 스택·큐, 그래프 등
-- [코딩 테스트 연습](CodeUp/CodingTest): 배열, 문자열, 연결 리스트, 백트래킹
+C++로 자료구조와 알고리즘을 학습하며 구현한 코드입니다. 인터넷 검색과 AI를 사용하지 않고, 코드를 직접 설계하고 작성했습니다.
